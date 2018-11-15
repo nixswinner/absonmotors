@@ -16,15 +16,18 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yarolegovich.lovelydialog.LovelyCustomDialog;
+import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
 
 import java.util.List;
+
+import nixontergech.com.absonmotors.R;
 import nixontergech.com.absonmotors.models.Products;
 
 
 /**
  * Recycler viewer adapter to display Receiptss
  */
-public class ProductssAdapter extends RecyclerView.Adapter<ProductssAdapter.ViewHolder> {
+public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
 
     private final List<Products> mValues;
     private Context context;
@@ -35,7 +38,7 @@ public class ProductssAdapter extends RecyclerView.Adapter<ProductssAdapter.View
     private TextView Products_description,sellers_name,Products_price,Products_name;
     private ImageView Products_image;
 
-    public ProductssAdapter(List<Products> values, Context ctx) {
+    public ProductsAdapter(List<Products> values, Context ctx) {
         this.mValues = values;
         this.context = ctx;
     }
@@ -81,7 +84,7 @@ public class ProductssAdapter extends RecyclerView.Adapter<ProductssAdapter.View
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            ProductsName = view.findViewById(R.id.Products_name);
+            ProductsName = view.findViewById(R.id.product_name);
             image = view.findViewById(R.id.image);
             price = view.findViewById(R.id.price);
         }
@@ -92,16 +95,16 @@ public class ProductssAdapter extends RecyclerView.Adapter<ProductssAdapter.View
     {
         Log.e("Products", "Clicked displayProductsDetails: "+Products.getName() );
         dialog= new LovelyCustomDialog(context)
-                .setView(R.layout.Products_details)
+                .setView(R.layout.products_details)
                 .setTopColorRes(R.color.colorPrimaryDark)
                 .setTitle(Products.getName()+" details")
                 .setCancelable(true)
-                .setListener(R.id.add_to_cart, new View.OnClickListener() {
+                .setListener(R.id.request_product, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         final ProgressDialog progressDialog = ProgressDialog.show(
-                                context, "Adding to Basket"
-                                , "Adding "+Products.getName()+" to your basket kindly wait...",
+                                context, "Requesting for "+Products.getName()
+                                , " Your request is being sent ",
                                 true);
                         progressDialog.show();
                         Handler handler = new Handler();
@@ -110,7 +113,38 @@ public class ProductssAdapter extends RecyclerView.Adapter<ProductssAdapter.View
                                 progressDialog.dismiss();
                                 dialog.dismiss();
                                 Toast toast = Toast.makeText(context,
-                                        "You can add another Products to your basket!",
+                                        "Requesting for the product",
+                                        Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            }
+                        }, 3000);
+                        alertwithinput("Enter your phone number");
+
+                    }
+                })
+                .setListener(R.id.request_loan_buying, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertwithinput("Enter your id number");
+                    }
+                })
+                .setListener(R.id.request_logbook, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        final ProgressDialog progressDialog = ProgressDialog.show(
+                                context, "Requesting for "+Products.getName()+" Logbook"
+                                , " Your request is being sent ",
+                                true);
+                        progressDialog.show();
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                                progressDialog.dismiss();
+                                dialog.dismiss();
+                                Toast toast = Toast.makeText(context,
+                                        "Requesting for the product",
                                         Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
@@ -119,24 +153,46 @@ public class ProductssAdapter extends RecyclerView.Adapter<ProductssAdapter.View
 
                     }
                 })
+
                 .show();
         //
-        Products_description = dialog.findViewById(R.id.Products_description);
+       /* Products_description = dialog.findViewById(R.id.products_description);
         sellers_name = dialog.findViewById(R.id.sellers_name);
-        Products_price = dialog.findViewById(R.id.Products_price);
-        Products_name=dialog.findViewById(R.id.Products_name);
-        Products_image = dialog.findViewById(R.id.Products_image);
+        Products_price = dialog.findViewById(R.id.Products_price);*/
+        Products_name=dialog.findViewById(R.id.product_name);
+        Products_image = dialog.findViewById(R.id.product_image);
 
         //set each details
-        Products_description.setText(Products.getDescription());
+       /* Products_description.setText(Products.getDescription());
         sellers_name.setText(""+Products.getProfile());
-        Products_price.setText(Products.getUnit_price());
+        Products_price.setText(Products.getUnit_price());*/
         Products_name.setText(Products.getName());
 
         //load Products image
         Glide.with(context)
-                .load(Products.getImage())
+                .load(Products.getUrl())
                 .into(Products_image);
 
+    }
+
+    public void alertwithinput(String msg)
+    {
+        new LovelyTextInputDialog(context)
+                .setTopColorRes(R.color.colorPrimaryDark)
+                .setTitle("Provide")
+                .setMessage(msg)
+                .setInputFilter("Error.Invalid Input",
+                        new LovelyTextInputDialog.TextFilter() {
+                    @Override
+                    public boolean check(String text) {
+                        return text.matches("\\w+");
+                    }
+                })
+                .setConfirmButton(android.R.string.ok, new LovelyTextInputDialog.OnTextInputConfirmListener() {
+                    @Override
+                    public void onTextInputConfirmed(String text) {
+                    }
+                })
+                .show();
     }
 }
