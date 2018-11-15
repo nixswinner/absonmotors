@@ -3,6 +3,7 @@ package nixontergech.com.absonmotors;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,7 +26,11 @@ public class MainActivity extends AppCompatActivity
 
         if (savedInstanceState ==null)
         {
-
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            MainFragment mainFragment =  MainFragment.newInstance().newInstance();
+            ft.addToBackStack("main");
+            ft.replace(R.id.container,mainFragment);
+            ft.commit();
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

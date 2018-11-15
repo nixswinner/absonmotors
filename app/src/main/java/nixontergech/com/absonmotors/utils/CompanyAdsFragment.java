@@ -1,4 +1,4 @@
-package nixontergech.com.absonmotors;
+package nixontergech.com.absonmotors.utils;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,24 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import ss.com.bannerslider.banners.Banner;
-import ss.com.bannerslider.banners.DrawableBanner;
-import ss.com.bannerslider.views.BannerSlider;
+import nixontergech.com.absonmotors.R;
 
 
-public class MainFragment extends Fragment {
-
+public class CompanyAdsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public MainFragment() {
+    public CompanyAdsFragment() {
         // Required empty public constructor
     }
-    public static MainFragment newInstance() {
-        MainFragment fragment = new MainFragment();
+
+    public static CompanyAdsFragment newInstance(String param1, String param2) {
+        CompanyAdsFragment fragment = new CompanyAdsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -34,7 +29,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (getArguments() != null) {;
         }
     }
 
@@ -42,20 +37,7 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_main,
-                container, false);
-
-        BannerSlider bannerSlider = view.findViewById(R.id.banner_slider1);
-        List<Banner> banners=new ArrayList<>();
-        //add banner using image url
-        //banners.add(new RemoteBanner("Put banner image url here ..."));
-        //add banner using resource drawable
-        banners.add(new DrawableBanner(R.drawable.logo));
-        banners.add(new DrawableBanner(R.drawable.logo));
-        banners.add(new DrawableBanner(R.drawable.logo));
-        bannerSlider.setBanners(banners);
-
-
+        View view= inflater.inflate(R.layout.fragment_company_ads, container, false);
 
         return view;
     }
@@ -83,6 +65,17 @@ public class MainFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
