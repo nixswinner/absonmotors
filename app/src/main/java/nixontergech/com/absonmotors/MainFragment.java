@@ -13,6 +13,7 @@ import java.util.List;
 
 import ss.com.bannerslider.banners.Banner;
 import ss.com.bannerslider.banners.DrawableBanner;
+import ss.com.bannerslider.banners.RemoteBanner;
 import ss.com.bannerslider.views.BannerSlider;
 
 
@@ -48,11 +49,14 @@ public class MainFragment extends Fragment {
         BannerSlider bannerSlider = view.findViewById(R.id.banner_slider1);
         List<Banner> banners=new ArrayList<>();
         //add banner using image url
-        //banners.add(new RemoteBanner("Put banner image url here ..."));
+
+        banners.add(new RemoteBanner("http://rambosoft.co.ke/data/logo.png"));
+        banners.add(new RemoteBanner("http://rambosoft.co.ke/data/motorbikes/EVO%20150.png"));
+        banners.add(new RemoteBanner("http://rambosoft.co.ke/data/3wheelers/Haojin%203%20Models.jpg"));
         //add banner using resource drawable
+        /*banners.add(new DrawableBanner(R.drawable.logo));
         banners.add(new DrawableBanner(R.drawable.logo));
-        banners.add(new DrawableBanner(R.drawable.logo));
-        banners.add(new DrawableBanner(R.drawable.logo));
+        banners.add(new DrawableBanner(R.drawable.logo));*/
         bannerSlider.setBanners(banners);
 
 
