@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             MainFragment mainFragment =  MainFragment.newInstance().newInstance();
             ft.addToBackStack("main");
-            ft.replace(R.id.container,mainFragment);
+            ft.add(R.id.container,mainFragment);
             ft.commit();
         }
 
@@ -111,6 +111,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_ownership) {
 
         } else if (id == R.id.nav_companyinfo) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            CompanyInfo mainFragment =  CompanyInfo.newInstance();
+            ft.addToBackStack("companyinfo");
+            ft.replace(R.id.container,mainFragment);
+            ft.commit();
 
         } else if (id == R.id.nav_share) {
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
