@@ -57,13 +57,7 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_main,
                 container, false);
-        recyclerView =view.findViewById(R.id.recyclerview);
-        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(
-                context,
-                LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager( new GridLayoutManager(context, 2));
-        checknet();
-
+        context = getActivity();
         BannerSlider bannerSlider = view.findViewById(R.id.banner_slider1);
         List<Banner> banners=new ArrayList<>();
         //add banner using image url
@@ -77,7 +71,12 @@ public class MainFragment extends Fragment {
         banners.add(new DrawableBanner(R.drawable.logo));*/
         bannerSlider.setBanners(banners);
 
-
+        recyclerView =view.findViewById(R.id.recyclerview);
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager( new GridLayoutManager(context, 2));
+        checknet();
 
         return view;
     }

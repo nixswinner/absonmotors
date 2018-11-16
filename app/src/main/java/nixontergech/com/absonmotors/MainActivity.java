@@ -1,5 +1,6 @@
 package nixontergech.com.absonmotors;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -92,15 +93,26 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            MainFragment mainFragment =  MainFragment.newInstance().newInstance();
+            ft.addToBackStack("main");
+            ft.replace(R.id.container,mainFragment);
+            ft.commit();
+        } else if (id == R.id.nav_logbook) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_ownership) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_companyinfo) {
 
         } else if (id == R.id.nav_share) {
+            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Abson Motors is the best place for you need " +
+                    "Motor Bikes and 3 wheeled vehicles.For more informations kindly visit: http://absonmotors.com");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "AbsonMotors");
+            startActivity(Intent.createChooser(sharingIntent, "Share using"));
 
         } else if (id == R.id.nav_send) {
 
