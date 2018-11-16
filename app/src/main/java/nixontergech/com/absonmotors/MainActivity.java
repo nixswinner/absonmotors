@@ -15,10 +15,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
+
+import nixontergech.com.absonmotors.utils.CompanyInfo;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        MainFragment.OnFragmentInteractionListener{
+        MainFragment.OnFragmentInteractionListener,
+        CompanyInfo.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +121,26 @@ public class MainActivity extends AppCompatActivity
             startActivity(Intent.createChooser(sharingIntent, "Share using"));
 
         } else if (id == R.id.nav_send) {
+            new LovelyTextInputDialog(MainActivity.this)
+                    .setTopColorRes(R.color.colorPrimaryDark)
+                    .setTitle("Your FeedBack")
+                    .setMessage("AbsonMotors Ltd Values your feedback\nKindly give us your feedback and " +
+                            "include your contact if you do not mind" +
+                            "Thank you ")
+                    .setInputFilter("Error.No Feedback provide Kindly give us your feedback",
+                            new LovelyTextInputDialog.TextFilter() {
+                                @Override
+                                public boolean check(String text) {
+                                    return text.matches("\\w+");
+                                }
+                            })
+                    .setConfirmButton(android.R.string.ok, new LovelyTextInputDialog.OnTextInputConfirmListener() {
+                        @Override
+                        public void onTextInputConfirmed(String text) {
+                            Toast.makeText(MainActivity.this,"Thank your feedback ",Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .show();
 
         }
 
