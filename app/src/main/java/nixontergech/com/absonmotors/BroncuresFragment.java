@@ -4,15 +4,26 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import nixontergech.com.absonmotors.adapters.BronchuresAdapter;
+import nixontergech.com.absonmotors.adapters.VideosAdapter;
+import nixontergech.com.absonmotors.models.Bronchures;
 
 
 public class BroncuresFragment extends Fragment {
 
+    private Context context;
     private OnFragmentInteractionListener mListener;
+    private RecyclerView recyclerView;
 
     public BroncuresFragment() {
         // Required empty public constructor
@@ -37,7 +48,33 @@ public class BroncuresFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_broncures, container,
                 false);
+        context = getActivity();
+        recyclerView =view.findViewById(R.id.recyclerview);
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager( new GridLayoutManager(context, 2));
+
+
+        getBronchures();
         return view;
+    }
+
+    private void getBronchures() {
+        List<Bronchures> bronchuresList = new ArrayList<>();
+        bronchuresList.add(new Bronchures("",""));
+        bronchuresList.add(new Bronchures("",""));
+        bronchuresList.add(new Bronchures("",""));
+        bronchuresList.add(new Bronchures("",""));
+        bronchuresList.add(new Bronchures("",""));
+        bronchuresList.add(new Bronchures("",""));
+
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager( new GridLayoutManager(context,
+                2));
+        recyclerView.setAdapter(new BronchuresAdapter(bronchuresList,context));
     }
 
     // TODO: Rename method, update argument and hook method into UI event

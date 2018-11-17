@@ -4,6 +4,9 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +16,19 @@ import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import nixontergech.com.absonmotors.R;
+import nixontergech.com.absonmotors.adapters.VideosAdapter;
+import nixontergech.com.absonmotors.models.Videos;
 
 
 public class CompanyInfo extends Fragment {
 
     private Context context;
     private OnFragmentInteractionListener mListener;
-    private VideoView videoView,videoView1;
-    private ImageView image1,image,image2,image3,image4;
+    private RecyclerView recyclerView;
 
     public CompanyInfo() {
         // Required empty public constructor
@@ -48,40 +55,33 @@ public class CompanyInfo extends Fragment {
         View view= inflater.inflate(R.layout.fragment_company_info,
                 container, false);
         context = getActivity();
-        videoView = view.findViewById(R.id.videoView);
-        image = view.findViewById(R.id.image);
-        image1 = view.findViewById(R.id.image1);
-        image2 = view.findViewById(R.id.image2);
-        image3 = view.findViewById(R.id.image3);
-        image4 = view.findViewById(R.id.image4);
-        //
-        Glide.with(context)
-                .load("http://rambosoft.co.ke/data/bronchures/HJ125-28.jpg")
-                .into(image);
-        Glide.with(context)
-                .load("http://rambosoft.co.ke/data/bronchures/HJ200GY-2.jpg")
-                .into(image1);
-        Glide.with(context)
-                .load("http://rambosoft.co.ke/data/bronchures/HJ150-11A.jpg")
-                .into(image2);
-        Glide.with(context)
-                .load("http://rambosoft.co.ke/data/bronchures/Haojin%203%20Models.jpg")
-                .into(image3);
-        Glide.with(context)
-                .load("http://rambosoft.co.ke/data/bronchures/IMGP4676.JPG")
-                .into(image4);
+        recyclerView =view.findViewById(R.id.recyclerview);
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager( new GridLayoutManager(context, 2));
 
 
-        String LINK = "http://rambosoft.co.ke/data/shortvideos/MOLO%20UPS%202.mp4";
-        MediaController mc = new MediaController(context);
-        mc.setAnchorView(videoView);
-        mc.setMediaPlayer(videoView);
-        Uri video = Uri.parse(LINK);
-        videoView.setMediaController(mc);
-        videoView.setVideoURI(video);
-        videoView.start();
+        getVideos();
+
 
         return view;
+    }
+    public void getVideos()
+    {
+        List<Videos> videosList = new ArrayList<>();
+        videosList.add(new Videos("",""));
+        videosList.add(new Videos("",""));
+        videosList.add(new Videos("",""));
+        videosList.add(new Videos("",""));
+        videosList.add(new Videos("",""));
+        videosList.add(new Videos("",""));
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager( new GridLayoutManager(context,
+                2));
+        recyclerView.setAdapter(new VideosAdapter(videosList,context));
     }
 
     // TODO: Rename method, update argument and hook method into UI event

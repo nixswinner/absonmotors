@@ -93,7 +93,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     //method to show Productss details
     public void displayProductsDetails(final Products Products)
     {
-        Log.e("Products", "Clicked displayProductsDetails: "+Products.getName() );
+        Log.e("Products", "Clicked displayVideo: "+Products.getName() );
         dialog= new LovelyCustomDialog(context)
                 .setView(R.layout.products_details)
                 .setTopColorRes(R.color.colorPrimaryDark)
