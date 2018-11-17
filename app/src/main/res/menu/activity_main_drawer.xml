@@ -14,12 +14,21 @@
             android:title="View Logbook" />
         <item
             android:id="@+id/nav_ownership"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_menu_manage"
             android:title="Request Ownership Transfer" />
         <item
             android:id="@+id/nav_companyinfo"
+            android:visible="false"
             android:icon="@drawable/ic_menu_manage"
             android:title="Company Information" />
+        <item
+            android:id="@+id/nav_videos"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Videos" />
+        <item
+            android:id="@+id/nav_bronchures"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Bronchures" />
     </group>
 
     <item android:title="Communicate">

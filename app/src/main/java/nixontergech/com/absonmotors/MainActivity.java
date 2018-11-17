@@ -24,7 +24,8 @@ import nixontergech.com.absonmotors.utils.CompanyInfo;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         MainFragment.OnFragmentInteractionListener,
-        CompanyInfo.OnFragmentInteractionListener{
+        CompanyInfo.OnFragmentInteractionListener,
+        BroncuresFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +111,23 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_ownership) {
 
-        } else if (id == R.id.nav_companyinfo) {
+        }
+        else if (id == R.id.nav_videos) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            CompanyInfo mainFragment =  CompanyInfo.newInstance();
+            ft.addToBackStack("companyinfo");
+            ft.replace(R.id.container,mainFragment);
+            ft.commit();
+
+        }
+        else if (id == R.id.nav_bronchures) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            BroncuresFragment broncuresFragment =  BroncuresFragment.newInstance();
+            ft.addToBackStack("bronchures");
+            ft.replace(R.id.container,broncuresFragment);
+            ft.commit();
+
+        }else if (id == R.id.nav_companyinfo) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             CompanyInfo mainFragment =  CompanyInfo.newInstance();
             ft.addToBackStack("companyinfo");
