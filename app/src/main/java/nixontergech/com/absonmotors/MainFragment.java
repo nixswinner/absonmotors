@@ -126,7 +126,7 @@ public class MainFragment extends Fragment {
     private void fetchProducts() {
         List<Products> productsList = new ArrayList<>();
         productsList.add(new Products(
-                "Apex haojue",
+                "Apex haojin",
                 "http://rambosoft.co.ke/data/motorbikes/Apex%20hj%20125-23.jpg",
                 ""));
         productsList.add(new Products(

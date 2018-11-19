@@ -2,6 +2,7 @@ package nixontergech.com.absonmotors.adapters;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,7 +19,9 @@ import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
 
 import java.util.List;
 
+import nixontergech.com.absonmotors.BronchureDisplay;
 import nixontergech.com.absonmotors.R;
+import nixontergech.com.absonmotors.VideoDisplay;
 import nixontergech.com.absonmotors.models.Videos;
 
 
@@ -40,7 +43,7 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.products_item, parent, false);
+                .inflate(R.layout.video_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -49,11 +52,15 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.ViewHolder
         holder.mItem = mValues.get(position);
         holder.name.setText(mValues.get(position).getName());
         //click
-        holder.image.setOnClickListener(new View.OnClickListener() {
+        holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //view details
-                displayVideo(mValues.get(position));
+               // displayVideo(mValues.get(position));
+                Intent intent = new Intent(context, VideoDisplay.class);
+                intent.putExtra("videoname", mValues.get(position).getName());
+                intent.putExtra("url", mValues.get(position).getUrl());
+                context.startActivity(intent);
 
             }
         });

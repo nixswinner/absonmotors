@@ -70,17 +70,18 @@ public class CompanyInfo extends Fragment {
     public void getVideos()
     {
         List<Videos> videosList = new ArrayList<>();
-        videosList.add(new Videos("",""));
-        videosList.add(new Videos("",""));
-        videosList.add(new Videos("",""));
-        videosList.add(new Videos("",""));
-        videosList.add(new Videos("",""));
-        videosList.add(new Videos("",""));
+        videosList.add(new Videos("MOLO CUTWAYS 1","http://rambosoft.co.ke/data/shortvideos/MOLO%20CUTWAYS%201.mp4"));
+        videosList.add(new Videos("MOLO CUTWAYS 2","http://rambosoft.co.ke/data/shortvideos/MOLO%20CUTWAYS%202.mp4"));
+        videosList.add(new Videos("MOLO UPS 1","http://rambosoft.co.ke/data/shortvideos/MOLO%20UPS%201.mp4"));
+        videosList.add(new Videos("MOLO UPS 2","http://rambosoft.co.ke/data/shortvideos/MOLO%20UPS%202.mp4"));
+        videosList.add(new Videos("MOLO UPS 3","http://rambosoft.co.ke/data/shortvideos/MOLO%20UPS3.mp4"));
+        videosList.add(new Videos("MOLO CUTWAYS 2","http://rambosoft.co.ke/data/shortvideos/MOLO%20CUTWAYS%203.mp4"));
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(
                 context,
                 LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager( new GridLayoutManager(context,
-                2));
+      /*  recyclerView.setLayoutManager( new GridLayoutManager(context,
+                2));*/
+      recyclerView.setLayoutManager(horizontalLayoutManager);
         recyclerView.setAdapter(new VideosAdapter(videosList,context));
     }
 

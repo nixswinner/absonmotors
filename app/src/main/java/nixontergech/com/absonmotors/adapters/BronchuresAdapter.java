@@ -2,6 +2,7 @@ package nixontergech.com.absonmotors.adapters;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.yarolegovich.lovelydialog.LovelyCustomDialog;
 
 import java.util.List;
 
+import nixontergech.com.absonmotors.BronchureDisplay;
 import nixontergech.com.absonmotors.R;
 import nixontergech.com.absonmotors.models.Bronchures;
 
@@ -27,7 +29,7 @@ public class BronchuresAdapter extends RecyclerView.Adapter<BronchuresAdapter.Vi
     private final List<Bronchures> mValues;
     private Context context;
     private Dialog dialog;
-    private ImageView Products_image;
+    private ImageView bronchure_image;
 
     public BronchuresAdapter(List<Bronchures> values, Context ctx) {
         this.mValues = values;
@@ -51,7 +53,11 @@ public class BronchuresAdapter extends RecyclerView.Adapter<BronchuresAdapter.Vi
             @Override
             public void onClick(View view) {
                 //view details
-                displayBronchure(mValues.get(position));
+                //displayBronchure(mValues.get(position));
+                Intent intent = new Intent(context, BronchureDisplay.class);
+                intent.putExtra("broncurename", mValues.get(position).getName());
+                intent.putExtra("url", mValues.get(position).getUrl());
+                context.startActivity(intent);
 
             }
         });
@@ -82,20 +88,20 @@ public class BronchuresAdapter extends RecyclerView.Adapter<BronchuresAdapter.Vi
     }
 
     //method to show Productss details
-    public void displayBronchure(final Bronchures Products)
+    public void displayBronchure(final Bronchures bronchures)
     {
-        Log.e("Products", "Clicked displayVideo: "+Products.getName() );
+        Log.e("Products", "Clicked displayVideo: "+bronchures.getName() );
         dialog= new LovelyCustomDialog(context)
                 .setView(R.layout.bronchure_details)
                 .setTopColorRes(R.color.colorPrimaryDark)
-                .setTitle(Products.getName())
+                .setTitle(bronchures.getName())
                 .setCancelable(true)
                 .show();
-                Products_image = dialog.findViewById(R.id.product_image);
+                bronchure_image = dialog.findViewById(R.id.imageView);
                 //load Products image
                 Glide.with(context)
-                        .load(Products.getUrl())
-                        .into(Products_image);
+                        .load(bronchures.getUrl())
+                        .into(bronchure_image);
 
     }
 }

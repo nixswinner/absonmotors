@@ -62,12 +62,12 @@ public class BroncuresFragment extends Fragment {
 
     private void getBronchures() {
         List<Bronchures> bronchuresList = new ArrayList<>();
-        bronchuresList.add(new Bronchures("",""));
-        bronchuresList.add(new Bronchures("",""));
-        bronchuresList.add(new Bronchures("",""));
-        bronchuresList.add(new Bronchures("",""));
-        bronchuresList.add(new Bronchures("",""));
-        bronchuresList.add(new Bronchures("",""));
+        bronchuresList.add(new Bronchures("Fabio Spec","http://rambosoft.co.ke/data/bronchures/FABIO%20SPEC.jpg"));
+        bronchuresList.add(new Bronchures("HJ125-28","http://rambosoft.co.ke/data/bronchures/HJ125-28.jpg"));
+        bronchuresList.add(new Bronchures("HJ125-50","http://rambosoft.co.ke/data/bronchures/HJ125-50.jpg"));
+        bronchuresList.add(new Bronchures("Haojin 3 Models","http://rambosoft.co.ke/data/bronchures/Haojin%203%20Models.jpg"));
+        bronchuresList.add(new Bronchures("HJ200ZH","http://rambosoft.co.ke/data/bronchures/HJ200ZH-6C.jpg"));
+        bronchuresList.add(new Bronchures("HJ200GY-2","http://rambosoft.co.ke/data/bronchures/Haojin%20HJ200GY-2%20Brochures%20and%20Specifications.jpg"));
 
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(
                 context,
